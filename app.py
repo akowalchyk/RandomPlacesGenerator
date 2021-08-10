@@ -18,7 +18,7 @@ def generate():
     distance =  request.form.get('distance')
     address = str(address)
     distance = str(distance)
-    google_url, photo_url, name, type = "hello"
+    google_url, photo_url, name, type = "hello", "hi", "how", "you"
     return render_template('index.html', google_url = google_url, photo_url = photo_url, name = name, type = type)
 
 
