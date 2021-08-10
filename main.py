@@ -38,11 +38,11 @@ def get_random_place(address, radius):
     API_KEY = get_my_key()
     print(API_KEY)
 
+    # grabbing coordinates
     geo_params = {
         'key': API_KEY,
         'address': address
     }
-
     geo_url = 'https://maps.googleapis.com/maps/api/geocode/json?'
     response = requests.get(geo_url, params=geo_params).json()
     if response['status'] == 'OK':
@@ -52,6 +52,7 @@ def get_random_place(address, radius):
         coords = lat + "," + lng
         print(coords)
 
+        # generating random place
         while True:
             type = random.choice(types)
             print(type)
@@ -67,10 +68,20 @@ def get_random_place(address, radius):
             if len(response['results']) > 0:
                 break
         json_place = random.choice(response['results'])
-        name = json_place['name']
-        return type, name
+        place_id = json_place['place_id']
 
-#get_random_place('Nome', '5000')
+        #generating place details from ID
+        det_params = {
+                'key': API_KEY,
+                'place_id': place_id
+            }
+        det_url = "https://maps.googleapis.com/maps/api/place/details/json?"
+        response = requests.get(det_url, params=det_params).json()
+        place_url = response['result']['url']
+        print(response)
+        return place_url
+
+get_random_place('Nome', '5000')
 
 
 

@@ -14,9 +14,11 @@ def home():
 @app.route('/generate',methods=['POST'])
 def generate():
     address =  request.form.get('address')
+    distance =  request.form.get('distance')
     address = str(address)
-    type, name = get_random_place(address, '3000')
-    return render_template('index.html', random_place= type + ':{}'.format(name))
+    distance = str(distance)
+    random_place = get_random_place(address, distance)
+    return render_template('index.html', random_place = random_place)
 
 
 if __name__ == "__main__":
