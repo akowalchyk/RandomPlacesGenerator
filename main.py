@@ -93,7 +93,7 @@ def get_random_place(address, radius):
 
         #grabbing name
         name = response['result']['name']
-        return google_url, photo_ref, name, type
+        return "hey", "sup", "hello", "hi"
 
 get_random_place('Nome', '5000')
 
