@@ -1,6 +1,7 @@
 import flask
 from flask import Flask, request, jsonify, render_template, flash
 from main import get_random_place
+from GoogleMapsAPIKey import get_my_key
 
 
 app = flask.Flask(__name__)
@@ -17,8 +18,9 @@ def generate():
     distance =  request.form.get('distance')
     address = str(address)
     distance = str(distance)
-    random_place = get_random_place(address, distance)
-    return render_template('index.html', random_place = random_place)
+    google_url, photo_url, name, type = get_random_place(address, distance)
+
+    return render_template('index.html', google_url = google_url, photo_url = photo_url, name = name, type = type)
 
 
 if __name__ == "__main__":

@@ -77,9 +77,23 @@ def get_random_place(address, radius):
             }
         det_url = "https://maps.googleapis.com/maps/api/place/details/json?"
         response = requests.get(det_url, params=det_params).json()
-        place_url = response['result']['url']
-        print(response)
-        return place_url
+
+        #grabbing google url
+        google_url = response['result']['url']
+        print(response['result'])
+
+        #grabbing photo or icon url
+        photo_ref = ""
+        if 'photos' in response['result']:
+            photo = response['result']['photos'][0]['photo_reference']
+            photo_ref = photo_url = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=" + photo + "&key=" + get_my_key()
+        else:
+            photo_ref = response['result']['icon']
+        print(photo_ref)
+
+        #grabbing name
+        name = response['result']['name']
+        return google_url, photo_ref, name, type
 
 get_random_place('Nome', '5000')
 
