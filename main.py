@@ -36,6 +36,7 @@ types = [
 
 def get_random_place(address, radius):
     API_KEY = get_my_key()
+    print(API_KEY)
 
     geo_params = {
         'key': API_KEY,
