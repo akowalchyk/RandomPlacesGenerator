@@ -26,8 +26,6 @@ types = [
 "restaurant",
 "shopping_mall",
 "spa",
-"stadium",
-"store",
 "synagogue",
 "tourist_attraction",
 "university",
@@ -73,20 +71,21 @@ def get_random_place(address, radius):
         #generating place details from ID
         det_params = {
                 'key': API_KEY,
-                'place_id': place_id
+                'place_id': place_id,
+                'language' : "en"
             }
         det_url = "https://maps.googleapis.com/maps/api/place/details/json?"
         response = requests.get(det_url, params=det_params).json()
 
         #grabbing google url
         google_url = response['result']['url']
-        print(response['result'])
+        #print(response['result'])
 
         #grabbing photo or icon url
         photo_ref = ""
         if 'photos' in response['result']:
             photo = response['result']['photos'][0]['photo_reference']
-            photo_ref = photo_url = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=" + photo + "&key=" + get_my_key()
+            photo_ref = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=" + photo + "&key=" + get_my_key()
         else:
             photo_ref = response['result']['icon']
         print(photo_ref)
@@ -94,8 +93,6 @@ def get_random_place(address, radius):
         #grabbing name
         name = response['result']['name']
         return google_url, photo_ref, name, type
-
-get_random_place('Nome', '5000')
 
 
 

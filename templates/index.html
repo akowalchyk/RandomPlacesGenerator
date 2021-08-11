@@ -1,38 +1,128 @@
 <!doctype html>
 <html lang="en">
-    <head>
-    <!-- Required meta tags -->
+  <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-    <!-- Bootstrap CSS -->
+    <title>Narrow Jumbotron Template for Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    </head>
+ <style>/* Space out content a bit */
+    body {
+        padding-top: 40px;
+        padding-bottom: 20px;
+      }
+      
+      /* Everything but the jumbotron gets side spacing for mobile first views */
+      .header,
+      .marketing,
+      .footer {
+        padding-right: 15px;
+        padding-left: 15px;
+      }
+      
+      /* Custom page header */
+      .header {
+        padding-bottom: 20px;
+        border-bottom: 1px solid #e5e5e5;
+      }
+      .header h3 {
+        margin-top: 0;
+        margin-bottom: 0;
+        line-height: 40px; /* Make the masthead heading the same height as the navigation */
+      }
+      
+      /* Custom page footer */
+      .footer {
+        padding-top: 19px;
+        color: #777;
+        border-top: 1px solid #e5e5e5;
+      }
+      
+      /* Customize container */
+      @media (min-width: 768px) {
+        .container {
+          max-width: 730px;
+        }
+      }
+      .container-narrow > hr {
+        margin: 30px 0;
+      }
+      
+      /* Main marketing message and sign up button */
+      .jumbotron {
+        text-align: center;
+        border-bottom: 1px solid #e5e5e5;
+      }
+      .jumbotron .btn {
+        padding: 14px 24px;
+        font-size: 21px;
+      }
+      
+      /* Supporting marketing content */
+      .marketing {
+        margin: 40px 0;
+      }
+      .marketing p + h4 {
+        margin-top: 28px;
+      }
+    </style>
+  </head>
 
-    <body>
-        <form action="{{ url_for('generate')}}"method="post">
+  <body>
+
+    <div class="container">
+
+      <div class="jumbotron">
+        <h1>Random Place Explorer</h1>
+        <p class="lead">In a new city and not sure what to do? Stuck at home with nothing to do? Enter your city and explore something new!</p>
+      </div>
+      <form action="{{ url_for('generate')}}"method="post">
         <div class="form-group">
         <div class="w-100 p-3">
-            <label for="address">Enter Address</label>
-            <input type="text" placeholder="Enter City or direct address" name="address" class="form-control my-1 p-2">
+            <label for="address">Enter City</label>
+            <input type="text" placeholder="ex: (Tokyo)" name="address" class="form-control my-1 p-2">
         </div>
     </div>
     <div class="form-group">
         <div class="w-100 p-3">
-            <label for="distance">Enter Max Distance from address (miles)</label>
-            <input type="text" placeholder="miles from address" name="distance" class="form-control my-1 p-2">
+            <label for="distance">Enter Max Distance from center of city (miles)</label>
+            <input type="text" placeholder="ex: (10)" name="distance" class="form-control my-1 p-2">
         </div>
     </div>
     <div class="form-group">
         <div class="col-lg-7">
-            <button type="submit" width="" class="btn btn-outline-primary mt-3 mb-3 p-2 btn1">Generate Random Place</button>
+            <button type="submit" width="" class="btn btn-outline-primary mt-3 mb-3 p-2 btn1" data-toggle="modal" data-target="#exampleModal">Generate Random Place</button>
         </div>
     </div>
+  
 </form>
-<a href = {{ google_url }}>{{ google_url }} </a>
-<img src={{ photo_url }}>
-<h1>{{ name }}</h1>
-<h1>{{ type }}</h1>
 
-    <body>
+<form method="POST">
+  <div class="modal modal-sheet position-static d-block bg-success py-5" tabindex="-1" role="dialog" id="modalSheet">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content rounded-6 shadow">
+        <div class="modal-header border-bottom-0">
+            <img src={{ photo_url }} class={{ photo_size }}>
+          </div>
+          <h5 class="modal-title">{{ name }}</h5>
+        <div class="modal-body py-0">
+          <p>{{ type }}</p>
+          <a href= {{ google_url}}> {{ url_str }}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
+</div> <!-- /container -->
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+  </body>
 </html>
