@@ -1,6 +1,7 @@
 
 import requests
 import random
+import time
 
 from GoogleMapsAPIKey import get_my_key
 
@@ -10,15 +11,10 @@ types = [
 "art_gallery",
 "bakery",
 "bar",
-"bicycle_store",
-"book_store",
 "bowling_alley",
 "cafe",
 "casino",
 "clothing_store",
-"gym",
-"hindu_temple",
-"mosque",
 "movie_theater",
 "museum",
 "night_club",
@@ -26,7 +22,6 @@ types = [
 "restaurant",
 "shopping_mall",
 "spa",
-"synagogue",
 "tourist_attraction",
 "university",
 "zoo"
@@ -51,6 +46,7 @@ def get_random_place(address, radius):
         print(coords)
 
         # generating random place
+        timeout = time.time() + 10
         while True:
             type = random.choice(types)
             print(type)
@@ -65,6 +61,8 @@ def get_random_place(address, radius):
             print(len(response['results']))
             if len(response['results']) > 0:
                 break
+            if time.time() > timeout:
+                return "https://www.mlb.com/mariners/ballpark", "No Response", "No Response", "Please Enter a valid input. Here's my fav place."
         json_place = random.choice(response['results'])
         place_id = json_place['place_id']
 

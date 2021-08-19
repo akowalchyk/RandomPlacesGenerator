@@ -22,7 +22,7 @@ def generate():
     url_str = "Everything you need to know from Google"
     photo_size = "rounded mx-auto d-block"
     return render_template('index.html', google_url = google_url, photo_url = photo_url, name = name, type = type,url_str = url_str,
-    photo_size = photo_size )
+    photo_size = photo_size)
 
 @app.route('/place', methods=['GET', 'POST'])
 def place():
